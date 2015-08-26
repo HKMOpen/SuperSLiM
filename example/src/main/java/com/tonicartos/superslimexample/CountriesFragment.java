@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.tonicartos.superslim.GridSLM;
 import com.tonicartos.superslim.ItemDecorator;
+import com.tonicartos.superslim.LayoutHelper;
 import com.tonicartos.superslim.LayoutManager;
 import com.tonicartos.superslim.LinearSLM;
 
@@ -90,9 +91,12 @@ public class CountriesFragment extends Fragment {
 
         mRecyclerView.addItemDecoration(decor);
 
-        mRecyclerView.setLayoutManager(new LayoutManager(getActivity()));
-
         mAdapter = new CountryNamesAdapter(getActivity(), mHeaderDisplay);
+        LayoutManager layoutManager = new LayoutManager.Builder(getActivity())
+                .addAdapter(mAdapter)
+                .build();
+        mRecyclerView.setLayoutManager(layoutManager);
+
         mAdapter.setMarginsFixed(mAreMarginsFixed);
         mAdapter.setHeaderDisplay(mHeaderDisplay);
         mRecyclerView.setAdapter(mAdapter);
